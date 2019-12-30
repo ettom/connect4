@@ -1,0 +1,58 @@
+@page
+@model WebApp.Pages.Game.Settings.AIPlayersModel
+
+@{
+    ViewData["Title"] = "AIPlayers";
+}
+
+<h1>Choose which players are controlled by AI</h1>
+
+
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Player number</th>
+            <th>Current setting</th>
+            <th>New setting</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        @for (var i = 1; i <= Model.TrackedSettings.PlayerPrototypes.Count; i++) {
+            <tr>
+                <th>@i</th>
+                <th>
+                    @* sort player prototypes *@
+                    @{ Model.TrackedSettings.PlayerPrototypes.Sort(
+                           (x, y) => x.Number.CompareTo(y.Number)); }
+                    @Model.TrackedSettings.PlayerPrototypes[i - 1].isAI
+                </th>
+
+                <th style="text-align: left">
+                    <div class="form-group">
+                        <input asp-for="@Model.TrackedSettings.PlayerPrototypes[i - 1].Number" type="hidden"/>
+                        <input asp-for="@Model.TrackedSettings.PlayerPrototypes[i - 1].Symbol" type="hidden"/>
+
+                        <input asp-for="@Model.TrackedSettings.PlayerPrototypes[i - 1].isAI" style="transform: scale(1.5)"/>
+                        <span asp-validation-for="@Model.TrackedSettings.PlayerPrototypes" class="text-danger"></span>
+                    </div>
+                </th>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <input type="submit" value="Apply" class="btn btn-primary"/>
+    </div>
+
+    <div>
+        <a asp-page="/Game/Settings/Index">Back to settings menu</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

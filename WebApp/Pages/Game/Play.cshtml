@@ -1,0 +1,73 @@
+@page
+@using InputOutput
+@model WebApp.Pages.Game.PlayModel
+
+@{
+    ViewData["Title"] = "Play";
+}
+
+<h1>Play</h1>
+
+<hr/>
+<div>
+
+    <p style="font-size: large">@Printer.GetWinMessage(Model.LevelState)</p>
+
+
+    <table class="table table-bordered " style="width: initial; empty-cells: show; font-size: x-large">
+
+        <thead>
+        <tr>
+            @for (var x = 1; x <= Model.LevelState.Width; x++) {
+                <th>
+                    @{ int? col = x; }
+
+                    <a asp-page="./Play" asp-route-levelStateId="@Model.LevelState.LevelStateId" asp-route-col="@col"
+                       class="btn btn-secondary btn-primary">
+                        @x
+                    </a>
+                </th>
+            }
+        </tr>
+        </thead>
+
+
+        <tbody>
+        @{ var isCellEmpty = true; }
+        @for (var y = 0; y < Model.LevelState.Height; y++) {
+            <tr>
+                @for (var x = 0; x < Model.LevelState.Width; x++) {
+                    <td style="text-align: center">
+                        @foreach (var player in Model.LevelState.Players) {
+                            @foreach (var disc in player.Discs) {
+                                if (disc.X == x && disc.Y == y) {
+                                    @player.Symbol
+                                    isCellEmpty = false;
+                                }
+                            }
+                        }
+                        @{if (isCellEmpty) @Html.Raw("&nbsp")}
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>
+
+@{
+    if (Model.LevelState.IsGameOver()) {
+        <a asp-page="./Play" class="btn btn-primary">
+            Start a new game
+        </a>
+    } else {
+        <a asp-page="./Save" asp-route-levelStateId="@Model.LevelState.LevelStateId" class="btn btn-primary">
+            Save the game
+        </a>
+    }
+}
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DAL\DAL.csproj" />
+      <ProjectReference Include="..\InputOutput\InputOutput.csproj" />
+      <ProjectReference Include="..\LoadSave\LoadSave.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Game\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Game\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Game\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Game\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Game\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Pages\Game\Create.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Pages\Game\Create.cshtml.cs" />
+    </ItemGroup>
+
+
+</Project>

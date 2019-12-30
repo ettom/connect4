@@ -1,0 +1,59 @@
+@page
+@model WebApp.Pages.Game.Settings.PlayerSymbolsModel
+
+@{
+    ViewData["Title"] = "PlayerSymbols";
+}
+
+<h1>Set player symbols</h1>
+
+
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Player number</th>
+            <th>Current symbol</th>
+            <th>New symbol</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        @* sort player prototypes *@
+        @{ Model.TrackedSettings.PlayerPrototypes.Sort(
+               (x, y) => x.Number.CompareTo(y.Number)); }
+
+        @for (var i = 1; i <= Model.TrackedSettings.PlayerPrototypes.Count; i++) {
+            <tr style="font-size: large">
+                <th>@i</th>
+                <th>
+                    @Model.TrackedSettings.PlayerPrototypes[i - 1].Symbol
+                </th>
+
+                <th>
+                    <div class="form-group">
+                        <input asp-for="@Model.TrackedSettings.PlayerPrototypes[i - 1].Number" type="hidden"/>
+                        <input asp-for="@Model.TrackedSettings.PlayerPrototypes[i - 1].isAI" type="hidden"/>
+
+                        <input asp-for="@Model.TrackedSettings.PlayerPrototypes[i - 1].Symbol" class="form-control" style="font-size: large;"/>
+                        <span asp-validation-for="@Model.TrackedSettings.PlayerPrototypes" class="text-danger"></span>
+                    </div>
+                </th>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <input type="submit" value="Apply" class="btn btn-primary"/>
+    </div>
+
+    <div>
+        <a asp-page="/Game/Settings/Index">Back to settings menu</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

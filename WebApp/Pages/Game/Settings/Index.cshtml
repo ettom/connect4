@@ -1,0 +1,13 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<h1>Settings</h1>
+<div class="list-group">
+    <a href="/Game/Settings/BoardDimensions" class="list-group-item list-group-item-action">Set board dimensions</a>
+    <a href="/Game/Settings/PlayerSymbols" class="list-group-item list-group-item-action">Set player symbols</a>
+    <a href="/Game/Settings/AIPlayers" class="list-group-item list-group-item-action">Choose which players are controlled by AI</a>
+    <a asp-page="/Game/Settings/Index" asp-route-reset="true" class="list-group-item list-group-item-action">Reset settings to default</a>
+</div>

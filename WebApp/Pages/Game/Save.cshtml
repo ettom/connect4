@@ -1,0 +1,47 @@
+@page
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model WebApp.Pages.Game.SaveModel
+
+
+@{
+    ViewData["Title"] = "Save";
+}
+
+<h1>Save the game</h1>
+
+<hr/>
+
+<form method="post">
+    <div class="form-group">
+        <input asp-for="@Model.SaveName.Name" class="form-control"/>
+        <span asp-validation-for="@Model.SaveName.Name" class="text-danger"></span>
+    </div>
+
+    <input asp-for="@Model.LevelStateId" type="hidden"/>
+
+
+    @{
+        if (ModelState.ValidationState == ModelValidationState.Invalid) {
+            @*set overwrite to true, user has no other method to post but the button*@
+            Model.SaveName.OverWrite = true;
+            <input asp-for="@Model.SaveName.OverWrite" type="hidden"/>
+            <div class="form-group">
+                <input type="submit" value="Overwrite" class="btn btn-danger"/>
+            </div>
+        } else {
+            <div class="form-group">
+                <input type="submit" value="Apply" class="btn btn-primary"/>
+            </div>
+        }
+    }
+</form>
+
+
+<a asp-page="./Play" asp-route-levelStateId="@Model.LevelStateId" class="btn btn-primary">
+    Back to the game
+</a>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>8</LangVersion>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="4.7.0-preview1.19504.10" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\GameEngine\GameEngine.csproj" />
+        <ProjectReference Include="..\DAL\DAL.csproj" />
+    </ItemGroup>
+
+</Project>

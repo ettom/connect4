@@ -1,0 +1,47 @@
+@page
+@model WebApp.Pages.Game.Settings.BoardDimensionsModel
+
+
+@{
+    ViewData["Title"] = "BoardDimensions";
+}
+
+<h1>Set board dimensions</h1>
+
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.TrackedSettings.Height" class="control-label"></label>
+                <input asp-for="@Model.TrackedSettings.Height" class="form-control"/>
+                <span asp-validation-for="@Model.TrackedSettings.Height" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.TrackedSettings.Width" class="control-label"></label>
+                <input asp-for="@Model.TrackedSettings.Width" class="form-control"/>
+                <span asp-validation-for="@Model.TrackedSettings.Width" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Strike size</label>
+                <input asp-for="@Model.TrackedSettings.StrikeSize" class="form-control"/>
+                <span asp-validation-for="@Model.TrackedSettings.StrikeSize" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Apply" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Game/Settings/Index">Back to settings menu</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

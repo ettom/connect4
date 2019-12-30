@@ -1,0 +1,12 @@
+bin/
+obj/
+/packages/
+.idea/
+*.mwb
+.gitattributes
+*.db
+*.bak
+*db-shm
+*db-wal
+Migrations/
+*.blob
